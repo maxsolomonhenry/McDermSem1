@@ -23,6 +23,10 @@ if __name__ == '__main__':
         stat = df[df['type'] == '32R']
         spec = df[df['type'] == 'S']
 
+        orig = orig.reset_index(drop=True)
+        stat = stat.reset_index(drop=True)
+        spec = spec.reset_index(drop=True)
+
         print('\nOriginal excerpts...')
         print(orig[scales].corr())
 
@@ -31,3 +35,12 @@ if __name__ == '__main__':
 
         print('\nSpectral resynth...')
         print(spec[scales].corr())
+
+        print('\nOriginal corr. Statistics')
+        print(orig[scales].corrwith(stat[scales]))
+
+        print('\nOriginal corr. Spectral')
+        print(orig[scales].corrwith(spec[scales]))
+
+        print('\nSpectral corr. Statistics')
+        print(stat[scales].corrwith(spec[scales]))
