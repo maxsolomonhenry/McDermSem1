@@ -15,6 +15,7 @@ if __name__ == '__main__':
     )
 
     scales = ['Fused', 'Busy', 'Kaleidoscopic']
+    method = 'spearman'
 
     for file in filenames:
         df = pd.read_csv(file)
@@ -28,19 +29,19 @@ if __name__ == '__main__':
         spec = spec.reset_index(drop=True)
 
         print('\nOriginal excerpts...')
-        print(orig[scales].corr())
+        print(orig[scales].corr(method=method))
 
         print('\nStatistical resynth...')
-        print(stat[scales].corr())
+        print(stat[scales].corr(method=method))
 
         print('\nSpectral resynth...')
-        print(spec[scales].corr())
+        print(spec[scales].corr(method=method))
 
         print('\nOriginal corr. Statistics')
-        print(orig[scales].corrwith(stat[scales]))
+        print(orig[scales].corrwith(stat[scales], method=method))
 
         print('\nOriginal corr. Spectral')
-        print(orig[scales].corrwith(spec[scales]))
+        print(orig[scales].corrwith(spec[scales], method=method))
 
         print('\nSpectral corr. Statistics')
-        print(stat[scales].corrwith(spec[scales]))
+        print(stat[scales].corrwith(spec[scales], method=method))
