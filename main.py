@@ -1,6 +1,7 @@
 import pandas as pd
 from glob import glob
 import os
+import warnings
 
 if __name__ == '__main__':
     DATA_PATH = './data'
@@ -19,6 +20,15 @@ if __name__ == '__main__':
 
     for file in filenames:
         df = pd.read_csv(file)
+
+        # Parse data with a warning message in first row.
+        if df.columns.size == 1:
+            warnings.warn(
+                'File {} is flagged. Skipping first row...'.format(
+                    os.path.basename(file)
+                )
+            )
+            df = pd.read_csv(file, skiprows=1)
 
         orig = orig.append(df[df['type'] == 'O'])
         stat = stat.append(df[df['type'] == '32R'])
