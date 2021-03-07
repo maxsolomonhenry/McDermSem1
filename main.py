@@ -5,11 +5,12 @@ Data analysis TODO:
 (2) ALSO, average ratings across subjects, then computer correlations.
     e.g. AVERAGE ALL RATINGS between subjects, then computer one correlation.
 
-(4) Do both spearman and pearson. In both cases, also do r**2. (square before averaging).
+(4) Do both spearman and pearson. In both cases, also do r**2. (square before
+    averaging).
 
 (5) how does this break down per stimulus?
        -   groups: orig, resynth, spectral (20 * 3 = 60 stimuli)
-       -   for each stimulus, calculate correlation between resyntheses.
+       -   for each stimulus, calculate correlation between re-syntheses.
            (analysis level, statistical power not important at this juncture).
 
 
@@ -54,6 +55,10 @@ if __name__ == '__main__':
     orig = orig.reset_index(drop=True)
     stat = stat.reset_index(drop=True)
     spec = spec.reset_index(drop=True)
+
+    # TODO
+    # orig.groupby(orig['stimNo']).mean()
+    # etc.
 
     print('\nOriginal excerpts...')
     print(orig[scales].corr(method=method))
